@@ -6,4 +6,4 @@ gem "middleman-bourbon"
 gem "middleman-bower"
 gem "neat"
 gem "ejs"
-
+gem "jshintrb"
