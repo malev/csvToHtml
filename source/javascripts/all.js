@@ -10,11 +10,11 @@ $(document).ready(function(){
   $(".convert").on('click', function(event){
     event.preventDefault();
     var input = $('textarea').val();
-    var results = esults = $.parse(input, {
-      header: false
+    var parsed = $.parse(input, {
+      header: true
     });
     $(".output").html(
-      template({rows: results})
+      template({rows: parsed.results.rows, fields: parsed.results.fields})
     );
   });
 });
