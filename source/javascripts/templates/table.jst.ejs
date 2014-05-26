@@ -1,0 +1,7 @@
+<table>
+  <tbody><% _.each(results.results, function(row){ %>
+    <tr><% _.each(row, function(cell){ %>
+      <td><%= cell %></td>
+    </tr><% }) %>
+  </tbody><% }); %>
+</table>
