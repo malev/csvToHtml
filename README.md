@@ -1,4 +1,10 @@
-# csvToTable
+csvToHTML
+=========
+
+CSV to Tables in HTML converter
+
+Steps
+-----
 
 copy a csv file
 
@@ -17,3 +23,5 @@ td classes
 # autodetect headers
 
 * http://stackoverflow.com/questions/2670515/autodetect-presence-of-csv-headers-in-a-file
+=======
+
