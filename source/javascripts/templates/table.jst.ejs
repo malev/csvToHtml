@@ -1,4 +1,4 @@
-<table>
+<%= tag('table', tableOptions) %>
   <thead><% _.each(fields, function(field){ %>
     <tr>
       <th><%= field %></th>
@@ -9,5 +9,4 @@
       <td><%= cell %></td><% }) %>
     </tr><% }); %>
   </tbody>
-
 </table>
