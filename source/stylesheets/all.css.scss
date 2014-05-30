@@ -1,0 +1,22 @@
+@charset "utf-8";
+@import "bourbon";
+@import "neat";
+
+.container{
+  @include outer-container;
+  header{
+    @include span-columns(12);
+  }
+}
+textarea{
+  width: 500px;
+  height: 500px;
+}
+
+section.main-container{
+  @include outer-container;
+  .input, .output{
+    @include span-columns(12);
+  }
+}
+
