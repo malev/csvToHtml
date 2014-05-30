@@ -1,12 +1,12 @@
 <%= tag('table', tableOptions) %>
-  <thead><% _.each(fields, function(field){ %>
+  <thead>
     <tr>
-      <th><%= field %></th>
-    </tr><% }); %>
+      <%= theads(fields, thOptions) %>
+    </tr>
   </thead>
   <tbody><% _.each(rows, function(row){ %>
-    <tr><% _.each(row, function(cell){ %>
-      <td><%= cell %></td><% }) %>
+    <tr>
+      <%= tableElements('td', row, tdOptions) %>
     </tr><% }); %>
   </tbody>
 </table>
