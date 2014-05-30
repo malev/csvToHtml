@@ -29,9 +29,12 @@ var viewHelpers = {
         values = _.values(row);
 
     _.each(values, function(cell, idx){
+      if(typeof options[idx] === 'undefined'){
+        options[idx] = {};
+      }
       options[idx]['data-title'] = titles[idx].trim();
       output += self.tag(name, options[idx]);
-      output += cell.trim() + '</' + name + '>';
+      output += (cell ? cell.toString().trim() : '') + '</' + name + '>';
     });
 
     return output;
@@ -75,11 +78,12 @@ var converter = {
       },
       thOptions: {
         0: {'class': 'first-klass'},
-        1: {'class': 'second-klass'}
+        1: {'class': 'second-klass'},
+        2: {'class': 'number'}
       },
       tdOptions: {
         0: {'class': 'center'},
-        1: {'class': 'right'}
+        2: {'class': 'number'}
       }
     }
 
@@ -89,14 +93,31 @@ var converter = {
   }
 }
 
+function inputsPopulate(){
+  var template = JST['templates/input'];
+  var input = $('textarea').val();
+  var parsed = $.parse(input, {
+    header: true
+  });
+  var headers = parsed.results.fields;
+  var output = '';
+
+  _.each(headers, function(header, idx){
+    output += template({header: header, idx: idx});
+  });
+  $('.tds').html(output);
+}
+
 $(document).ready(function(){
   $('.input textarea').on('change', function(event){
     event.preventDefault();
     converter.convert();
+    inputsPopulate();
   });
 
   $('input.convert').on('click', function(event){
     event.preventDefault();
     converter.convert();
+    inputsPopulate();
   });
 });
