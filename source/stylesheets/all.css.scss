@@ -3,20 +3,29 @@
 @import "neat";
 
 .container{
+  font-family: 'Inconsolata', monospace;
   @include outer-container;
   header{
     @include span-columns(12);
   }
 }
-textarea{
-  width: 500px;
-  height: 500px;
-}
 
 section.main-container{
-  @include outer-container;
-  .input, .output{
-    @include span-columns(12);
+  section.tables{
+    @include outer-container;
+    .input, .output{
+      @include span-columns(6);
+      textarea{
+        width: 100%;
+        height: 500px;
+      }
+    }
+  }
+  section.controls{
+    @include outer-container;
+    .convert-button{
+      text-align: center;
+      @include span-columns(12);
+    }
   }
 }
-
