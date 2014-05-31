@@ -95,6 +95,69 @@ var converter = {
   }
 }
 
+function CSV(){
+  this.input = $('textarea.input').val();
+  this.parsed = $.parse(this.input, {
+    header: true
+  });
+  this.extend = function(options){
+    options.rows = this.parsed.results.rows;
+    options.fields = this.parsed.results.fields;
+
+    return options;
+  }
+}
+
+function InputsPopulator(headers){
+  this.template = JST['templates/input'];
+
+  this.populate = function(headers){
+    var self = this,
+        output;
+
+    _.each(['th', 'td'], function(tag){
+      output = ''
+      _.each(headers, function(header, idx){
+        output += self.template({header: header, idx: idx, tag: tag});
+      });
+      $('.'+ tag +'s').html(output);
+    });
+  }
+
+  this.populate(headers);
+}
+
+function Configuration(){
+  this.options = {
+    tableOptions: {},
+    thOptions: {},
+    tdOptions: {}
+  };
+
+  this.updateTagClasses = function( tag ){
+    var classSelector = '.' + tag + '-class',
+        tagOption = tag + 'Options',
+        self = this,
+        className;
+
+    $(classSelector).each(function( index ){
+      className = $(this).val().trim();
+      if ( className.length !== 0 ) {
+        self.options[tagOption][index] = {'class': className};
+      }
+    });
+  };
+
+  this.update = function(){
+    this.options.tableOptions.class = $('#table-class').val().trim();
+    this.options.tableOptions.id = $('#table-id').val().trim();
+    this.updateTagClasses('th');
+    this.updateTagClasses('td');
+
+    return this.options;
+  }
+}
+
 function inputsPopulate(){
   var template = JST['templates/input'];
   var input = $('textarea').val();
