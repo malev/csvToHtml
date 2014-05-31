@@ -2,6 +2,8 @@
 //=require jquery/dist/jquery
 //=require papa-parse/jquery.parse
 //=require templates/table
+//=require templates/input
+
 
 var viewHelpers = {
   table: function(klass, options){
@@ -100,12 +102,19 @@ function inputsPopulate(){
     header: true
   });
   var headers = parsed.results.fields;
-  var output = '';
 
+  var outputTh = '';
   _.each(headers, function(header, idx){
-    output += template({header: header, idx: idx});
+    outputTh += template({header: header, idx: idx, tag: 'th'});
   });
-  $('.tds').html(output);
+  $('.ths').html(outputTh);
+
+  var outputTd = '';
+  _.each(headers, function(header, idx){
+    outputTd += template({header: header, idx: idx, tag: 'td'});
+  });
+  $('.tds').html(outputTd);
+
 }
 
 $(document).ready(function(){

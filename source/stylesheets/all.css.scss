@@ -27,5 +27,11 @@ section.main-container{
       text-align: center;
       @include span-columns(12);
     }
+    .table-config, .thead-config, .tbody-config{
+      @include span-columns(12);
+      .th, .td{
+        @include span-columns(3)
+      }
+    }
   }
 }
