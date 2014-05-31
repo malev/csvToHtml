@@ -96,16 +96,26 @@ var converter = {
 }
 
 function CSV(){
-  this.input = $('textarea.input').val();
-  this.parsed = $.parse(this.input, {
-    header: true
-  });
+  this.input = '';
+  this.parsed = {};
+  this.headers = [];
+
   this.extend = function(options){
     options.rows = this.parsed.results.rows;
     options.fields = this.parsed.results.fields;
 
     return options;
-  }
+  };
+
+  this.update = function(){
+    this.input = $('textarea.input').val();
+    this.parsed = $.parse(this.input, {
+      header: true
+    });
+    this.headers = this.parsed.results.fields;
+  };
+
+  this.update();
 }
 
 function InputsPopulator(headers){
@@ -181,15 +191,13 @@ function inputsPopulate(){
 }
 
 $(document).ready(function(){
+  var csv = new CSV(),
+      config = new Configuration(),
+      inputs = new InputsPopulator(csv.headers);
+
   $('.input textarea').on('change', function(event){
     event.preventDefault();
-    converter.convert();
-    inputsPopulate();
-  });
-
-  $('input.convert').on('click', function(event){
-    event.preventDefault();
-    converter.convert();
-    inputsPopulate();
+    csv.update();
+    inputs.populate(csv.headers);
   });
 });
