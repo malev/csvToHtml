@@ -5,7 +5,7 @@
 //=require templates/input
 
 
-function Converter(config){
+function Converter(config) {
   this.config = config;
   this.template = JST['templates/table'];
 
@@ -18,11 +18,11 @@ function Converter(config){
       }
     },
 
-    theads: function(cells, options){
+    theads: function(cells, options) {
       var output = '',
           self = this;
 
-      _.each(cells, function(cell, idx){
+      _.each(cells, function(cell, idx) {
         output += self.tag('th', options[idx]);
         output += cell.trim() + '</th>';
       });
@@ -37,7 +37,7 @@ function Converter(config){
           values = _.values(row);
 
       _.each(values, function(cell, idx){
-        if(typeof options[idx] === 'undefined'){
+        if(typeof options[idx] === 'undefined') {
           options[idx] = {};
         }
         options[idx]['data-title'] = titles[idx].trim();
@@ -48,11 +48,11 @@ function Converter(config){
       return output;
     },
 
-    tag: function(name, options){
+    tag: function(name, options) {
       var output = '<' + name,
           attributes = this.buildAttributes(options);
 
-      if(attributes.length === 0){
+      if(attributes.length === 0) {
         output += '>';
       } else {
         output += ' '+ attributes + '>';
@@ -60,11 +60,11 @@ function Converter(config){
       return output;
     },
 
-    buildAttributes: function(options){
+    buildAttributes: function(options) {
       var output = [],
           key;
       for (key in options) {
-        if (options.hasOwnProperty(key)){
+        if (options.hasOwnProperty(key)) {
           output.push(key + '="' + options[key] + '"');
         }
       }
@@ -72,7 +72,7 @@ function Converter(config){
     }
   };
 
-  this.generate = function(){
+  this.generate = function() {
     this.config.update();
 
     $(".output textarea").html(
@@ -81,13 +81,13 @@ function Converter(config){
   }
 }
 
-function CSV(){
+function CSV() {
   this.input = '';
   this.parsed = {};
   this.headers = [];
   this.rows = [];
 
-  this.update = function(){
+  this.update = function() {
     this.input = $('textarea.input').val();
     this.parsed = $.parse(this.input, {
       header: true
@@ -99,16 +99,16 @@ function CSV(){
   this.update();
 }
 
-function InputsPopulator(headers){
+function InputsPopulator(headers) {
   this.template = JST['templates/input'];
 
-  this.populate = function(csv){
+  this.populate = function(csv) {
     var self = this,
         output;
 
-    _.each(['th', 'td'], function(tag){
+    _.each(['th', 'td'], function(tag) {
       output = ''
-      _.each(csv.headers, function(header, idx){
+      _.each(csv.headers, function(header, idx) {
         output += self.template({header: header, idx: idx, tag: tag});
       });
       $('.'+ tag +'s').html(output);
@@ -118,7 +118,7 @@ function InputsPopulator(headers){
   this.populate(headers);
 }
 
-function Configuration(csv){
+function Configuration(csv) {
   this.csv = csv;
   this.options = {
     tableOptions: {},
@@ -128,13 +128,13 @@ function Configuration(csv){
     rows: []
   };
 
-  this.updateTagClasses = function( tag ){
+  this.updateTagClasses = function( tag ) {
     var classSelector = '.' + tag + '-class',
         tagOption = tag + 'Options',
         self = this,
         className;
 
-    $(classSelector).each(function( index ){
+    $(classSelector).each(function( index ) {
       className = $(this).val().trim();
       if ( className.length !== 0 ) {
         self.options[tagOption][index] = {'class': className};
@@ -142,7 +142,7 @@ function Configuration(csv){
     });
   };
 
-  this.update = function(){
+  this.update = function() {
     this.csv.update();
     this.options.rows = this.csv.rows;
     this.options.fields = this.csv.headers;
@@ -155,26 +155,26 @@ function Configuration(csv){
   }
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
   var csv = new CSV(),
       config = new Configuration(csv),
       inputs = new InputsPopulator(csv),
       converter = new Converter(config);
 
-  $('.input textarea').on('change', function(event){
+  $('.input textarea').on('change', function(event) {
     event.preventDefault();
     config.update();
     inputs.populate(csv);
     converter.generate();
   });
 
-  $('.controls .convert').on('click', function(event){
+  $('.controls .convert').on('click', function(event) {
     event.preventDefault();
     config.update();
     converter.generate();
   });
 
-  $('.controls input').on('change', function(event){
+  $('.controls input').on('change', function(event) {
     event.preventDefault();
     config.update();
     converter.generate();
