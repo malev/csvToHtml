@@ -159,7 +159,17 @@ $(document).ready(function() {
   var csv = new CSV(),
       config = new Configuration(csv),
       inputs = new InputsPopulator(csv),
-      converter = new Converter(config);
+      converter = new Converter(config),
+      $input;
+
+  $('.example').on('click', function(event) {
+    event.preventDefault();
+    $.get($(this).attr('href'), function(csvData) {
+      $input = $('textarea.input');
+      $input.html(csvData);
+      $input.trigger('change');
+    })
+  });
 
   $('.input textarea').on('change', function(event) {
     event.preventDefault();
