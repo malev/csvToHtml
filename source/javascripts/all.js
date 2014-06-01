@@ -173,4 +173,10 @@ $(document).ready(function(){
     config.update();
     converter.generate();
   });
+
+  $('.controls input').on('change', function(event){
+    event.preventDefault();
+    config.update();
+    converter.generate();
+  });
 });
