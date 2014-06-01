@@ -2,6 +2,9 @@
 @import "bourbon";
 @import "neat";
 
+$desktop: new-breakpoint(min-width 768px 12);
+$mobile: new-breakpoint(max-width 480px);
+
 .container{
   font-family: 'Inconsolata', monospace;
   @include outer-container;
@@ -18,6 +21,10 @@ section.main-container{
       textarea{
         width: 100%;
         height: 500px;
+        margin-bottom: 1em;
+      }
+      @include media($mobile) {
+        @include span-columns(12);
       }
     }
   }
@@ -29,8 +36,19 @@ section.main-container{
     }
     .table-config, .thead-config, .tbody-config{
       @include span-columns(12);
+      .table-option{
+        @include span-columns(4);
+        @include media($mobile) {
+          margin-bottom: .7em;
+          @include span-columns(12);
+        }
+      }
       .th, .td{
-        @include span-columns(3)
+        @include span-columns(3);
+        @include media($mobile) {
+          margin-bottom: .7em;
+          @include span-columns(12);
+        }
       }
     }
   }
