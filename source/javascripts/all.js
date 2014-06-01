@@ -42,7 +42,7 @@ function Converter(config){
         }
         options[idx]['data-title'] = titles[idx].trim();
         output += self.tag(name, options[idx]);
-        output += (cell ? cell.toString().trim() : '') + '</' + name + '>';
+        output += cell.toString().trim() + '</' + name + '>';
       });
 
       return output;
