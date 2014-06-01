@@ -5,18 +5,96 @@
 $desktop: new-breakpoint(min-width 768px 12);
 $mobile: new-breakpoint(max-width 480px);
 
+// Colors
+$lighter2: #FFFF73;
+$lighter1: #FFFF40;
+$main-color: #FFFF00;
+$darker1: #BFBF30;
+$darker2: #A6A600;
+
+$lighter3: tint($lighter2, 90%);
+$darker3: shade($darker2, 10%);
+
+// Fonts
+$regular-font: 'Lato', sans-serif;
+$monospace-font: 'Inconsolata', monospace;
+
+// Mixins
+@mixin small-text{
+  p {
+    margin: .4em 0;
+    font-size: .9em;
+    line-height: 1em;
+  }
+}
+
+body{
+  background-color: $lighter3;
+}
+a{
+  text-decoration: none;
+  color: $darker3;
+}
+button, input[type='submit'] {
+  @include button;
+}
 .container{
-  font-family: 'Inconsolata', monospace;
+  font-family: $regular-font;
   @include outer-container;
   header{
-    @include span-columns(12);
+    background-color: $main-color;
+    border-bottom: 5px solid $darker2;
+    border-left: 5px solid $darker2;
+    border-right: 5px solid $darker2;
+    margin-bottom: 1em;
+    padding: 0 0 0 1em;
+    @include border-bottom-radius(5px);
+    .logo, .instructions{
+      @include span-columns(6);
+      @include media($mobile) {
+        @include span-columns(12);
+      }
+    }
+    .instructions{
+      padding-top: .5em;
+      @include small-text;
+    }
+    &:after{
+      clear: both;
+      content: "";
+      display: block;
+    }
+  }
+  footer{
+    background-color: $main-color;
+    border-top: 5px solid $darker2;
+    border-left: 5px solid $darker2;
+    border-right: 5px solid $darker2;
+    margin-top: 2em;
+
+    @include border-top-radius(5px);
+    .info, .thanks{
+      padding: .5em 0 1em 1em;
+      @include small-text;
+      @include span-columns(6);
+      @include media($mobile) {
+        @include span-columns(12);
+      }
+    }
+    &:after{
+      clear: both;
+      content: "";
+      display: block;
+    }
   }
 }
 
 section.main-container{
   section.tables{
     @include outer-container;
+    font-size: .9em;
     .input, .output{
+      font-family: $monospace-font;
       @include span-columns(6);
       textarea{
         width: 100%;
@@ -30,23 +108,36 @@ section.main-container{
   }
   section.controls{
     @include outer-container;
+    label{
+      width: 46px;
+      display: inline-block;
+    }
+    input[type='text']{
+      width: 160px;
+    }
     .convert-button{
+      margin-top: 1em;
       text-align: center;
       @include span-columns(12);
+    }
+    .table-option{
+      label{
+        width: 83px;
+      }
     }
     .table-config, .thead-config, .tbody-config{
       @include span-columns(12);
       .table-option{
-        @include span-columns(4);
+        @include span-columns(3);
         @include media($mobile) {
           margin-bottom: .7em;
           @include span-columns(12);
         }
       }
       .th, .td{
+        margin-bottom: .7em;
         @include span-columns(3);
         @include media($mobile) {
-          margin-bottom: .7em;
           @include span-columns(12);
         }
       }

@@ -5,12 +5,44 @@
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <title><%= current_page.data.title || "csvToTable" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag "normalize", "all" %>
   </head>
   <body class="<%= page_classes %>">
     <div class="container">
+      <header>
+        <div class="logo">
+          <h1>CSV to table</h1>
+        </div>
+        <div class="instructions">
+          <p>
+            <b>Instructions: </b>
+            Paste your CSV and play with the options at the bottom of the page.
+          </p>
+          <p>
+            Click on <b>Convert</b> and you'll have your html table ready to go!
+          </p>
+          <p>
+            You can also play with the examples.
+          </p>
+        </div>
+      </header>
       <%= yield %>
+      <footer>
+        <div class="info">
+          <p>
+            CSV to Table is a tool for converting csv text into tables in HTML code.
+            Adds data-title for default in every row to help responsiveness (See
+            <a href="http://blog.apps.npr.org/2014/05/09/responsive-data-tables.html">here</a>).
+          </p>
+          <p>
+            <a href="https://github.com/malev/csvToHtml">You can check the Project on Github</a>
+          </p>
+          </p>
+        </div>
+        <div class="thanks">© Copyright 2014, Marcos Vanetta</div>
+      </footer>
     </div>
     <%= javascript_include_tag  "all" %>
   </body>
