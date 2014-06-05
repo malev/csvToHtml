@@ -5,6 +5,8 @@ CSV to Table is a tool for converting csv text into tables in HTML code.
 Adds `data-title` for default in every row to help responsiveness
 (See [here](http://blog.apps.npr.org/2014/05/09/responsive-data-tables.html)).
 
+You can read about this tool in my [blog](http://codingnews.info/post/csv-to-table.html).
+
 © 2014 Marcos Vanetta. Available under MIT License. See
  [`LICENSE.md`](LICENSE.md).
 
