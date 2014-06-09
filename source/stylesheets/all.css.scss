@@ -55,6 +55,9 @@ button, input[type='submit'] {
         @include span-columns(12);
       }
     }
+    .logo{
+      margin-top: 0.5em;
+    }
     .instructions{
       padding-top: .5em;
       @include small-text;
