@@ -75,7 +75,7 @@ function Converter(config) {
   this.generate = function() {
     this.config.update();
 
-    $(".output textarea").html(
+    $(".output textarea").val(
       this.template(_.extend(this.config.options, this.viewHelpers))
       );
   }
@@ -166,16 +166,9 @@ $(document).ready(function() {
     event.preventDefault();
     $.get($(this).attr('href'), function(csvData) {
       $input = $('textarea.input');
-      $input.html(csvData);
-      $input.trigger('change');
+      $input.val(csvData);
+      $('.controls .convert').trigger('click');
     })
-  });
-
-  $('.input textarea').on('change', function(event) {
-    event.preventDefault();
-    config.update();
-    inputs.populate(csv);
-    converter.generate();
   });
 
   $('.controls .convert').on('click', function(event) {
